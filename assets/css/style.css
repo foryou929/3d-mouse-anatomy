@@ -1,0 +1,326 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 34px;
+    font-weight: bold;
+    text-align: center;
+}
+
+img {
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+input,
+select {
+    border: none;
+    outline: none;
+}
+
+.btn {
+    cursor: pointer;
+    /* transition: .3s ease; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+.btn:hover {
+    filter: brightness(1.15);
+}
+
+.single-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+._sp {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    ._sp {
+        display: block;
+    }
+
+    ._pc {
+        display: none;
+    }
+
+    .wrapper {
+        width: 100vw;
+        /* height: auto; */
+        display: flex;
+        padding: 5px;
+        background-color: gray;
+        height: 100vh;
+    }
+
+    .wrapper>.result-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+        padding: 40px;
+    }
+
+    .joint-result {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .joint-result #scene-container {
+        width: 100%;
+        height: 50vh;
+    }
+}
+
+/* index page  */
+.wrapper {
+    width: 100vw;
+    /* height: auto; */
+    display: flex;
+    padding: 5px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: gray;
+    height: 80vh;
+}
+
+.slider-container {
+    width: 100%;
+    height: 20vh;
+    background-color: gray;
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 10px;
+    padding: 20px;
+}
+
+.slider-card {
+    width: 250px;
+    color: white;
+    padding: 20px;
+
+}
+
+.wrapper>.result-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    padding: 20px;
+}
+
+.joint-result {
+    width: 100%;
+    height: 50vh;
+}
+
+.joint-result #scene-container {
+    width: 100%;
+    height: 50vh;
+}
+
+.wrapper>.joint-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px 40px;
+    width: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.wrapper>.joint-container::-webkit-scrollbar {
+    width: 12px;
+    /* Set the width of the scrollbar */
+}
+
+.wrapper>.joint-container::-webkit-scrollbar-thumb {
+    background-color: #808080;
+    border: 1px solid white;
+    /* Set the color of the thumb */
+    border-radius: 6px;
+    /* Set the border radius of the thumb */
+}
+
+.wrapper>.joint-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 6px;
+    /* Set the color of the track */
+}
+.slider-container::-webkit-scrollbar {
+    width: 12px;
+    /* Set the width of the scrollbar */
+}
+
+.slider-container::-webkit-scrollbar-thumb {
+    background-color: #808080;
+    border: 1px solid white;
+    /* Set the color of the thumb */
+    border-radius: 6px;
+    /* Set the border radius of the thumb */
+}
+
+.slider-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    border-radius: 6px;
+    /* Set the color of the track */
+}
+
+.joint-card {
+    width: 180px;
+    color: white;
+}
+
+.joint-title {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.joint-input {
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.joint-input p {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.joint-input input {
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    background-color: darkgray;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 18px;
+    padding: 4px 10px;
+}
+
+.joint-input .label {
+    font-size: 18px;
+    margin-right: 10px;
+    width: 40px
+}
+
+@media (max-width: 1000px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .wrapper>.result-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .wrapper>.joint-container {
+        width: 100%;
+    }
+}
+
+.btn-export {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    padding: 10px 20px;
+    color: black;
+    font-weight: 800;
+    font-size: 18px;
+    border-radius: 10px;
+    /* display: none; */
+}
+
+.btn-import {
+    position: absolute;
+    top: 25px;
+    left: 150px;
+    padding: 10px 20px;
+    color: black;
+    font-weight: 800;
+    font-size: 18px;
+    border-radius: 10px;
+    /* display: none; */
+}
+
+.csvInput {
+    position: absolute;
+    top: 25px;
+    left: 150px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: 800;
+    font-size: 18px;
+    border-radius: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: none;
+}
+
+.btn-container {
+    padding-right: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.button-wrapper {
+    display: flex;
+    width: 100px;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.play-btn {
+    width: 17px;
+    height: 17px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid black;
+}
+
+.record-btn {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.stop-btn {
+    width: 17px;
+    height: 17px;
+    background-color: black;
+    color: black;
+}
