@@ -72,7 +72,7 @@ class OBJExporter {
           vertex.y = vertices.getY(i);
           vertex.z = vertices.getZ(i);
           vertex.applyMatrix4(mesh.matrixWorld);
-          output += "v " + vertex.x + " " + vertex.y + " " + vertex.z + "\n";
+          output += "v " + (vertex.x * 10) + " " + (vertex.y * 10) + " " + (vertex.z * 10) + "\n";
         }
       }
       if (uvs !== void 0) {
