@@ -9,6 +9,8 @@ import { Loop } from './systems/Loop.js';
 import { Scene, BackSide, SkeletonHelper, MeshBasicMaterial, Group, SkinnedMesh, Skeleton, Vector2, Vector3, Vector4, Matrix4, Matrix3 } from 'https://cdn.skypack.dev/three@v0.132.2';
 import { computeMorphedAttributes } from 'https://cdn.skypack.dev/three@v0.132.2/examples/jsm/utils/BufferGeometryUtils.js';
 
+
+// OBJ exporter redefine because default object exporter is older.
 class OBJExporter {
   parse(object) {
     let output = "mtllib materials.mtl\n";
@@ -509,45 +511,51 @@ class World {
       return truncatedNumber;
     }
 
+    // 1. Import csv
     function importCsv() {
-      const input = document.getElementById('csvInput');
-      const file = input.files[0];
-      let event = new Event('change');
-      let meshParams = [];
-      let shapeParams = [];
-
+      // 1.1. Parse csv file
+      const input = document.getElementById('csvInput'); // Get the file input element from the HTML document
+      const file = input.files[0]; // Get the selected file
+      let event = new Event('change'); // Create a custom event object
+      let meshParams = []; // Array to store mesh parameters extracted from the CSV file
+      let shapeParams = []; // Array to store shape parameters extracted from the CSV file
+    
       if (file) {
-        const reader = new FileReader();
-
+        const reader = new FileReader(); // Create a FileReader object to read the contents of the file
+    
         reader.onload = function (e) {
           const csvContent = e.target.result;
           const data = parseCSV(csvContent);
+    
           // Use the parsed data as needed
+          // Extract mesh parameters from rows 1 to 55
           for (let i = 1; i <= 55; i++) {
             let row = data[i].split(",");
             for (let j = 1; j <= 6; j++) {
               meshParams.push(Number(row[j]));
             }
           }
-
+    
+          // Extract shape parameters from rows 56 to 66
           for (let k = 56; k <= 66; k++) {
             let row = data[k].split(",");
             shapeParams.push(Number(row[1]));
           }
-
+    
+          // Dispatch events to update input values
           for (let j = 0; j <= meshParams.length - 1; j++) {
             inputMeshes[j].value = Number(meshParams[j]);
             inputMeshes[j].dispatchEvent(event);
           }
-
+    
+          // 1.2. Set values of input elements
           for (let l = 0; l <= shapeParams.length - 1; l++) {
             inputBlendShapes[l].value = Number(shapeParams[l]);
             inputBlendShapes[l].dispatchEvent(event);
           }
-
         };
-
-        reader.readAsText(file);
+    
+        reader.readAsText(file); // Read the file as text
       } else {
         console.error('No file selected.');
       }
