@@ -10,9 +10,11 @@ import { Scene, BackSide, SkeletonHelper, MeshBasicMaterial, Group, SkinnedMesh,
 import { computeMorphedAttributes } from 'https://cdn.skypack.dev/three@v0.132.2/examples/jsm/utils/BufferGeometryUtils.js';
 
 
-// OBJ exporter redefine because default object exporter is older.
+// OBJ exporter definition
 class OBJExporter {
+  // parse function
   parse(object) {
+    // first line of obj file for material export
     let output = "mtllib materials.mtl\n";
     let mtl = "";
     let indexVertex = 0;
