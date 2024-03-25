@@ -511,9 +511,9 @@ class World {
       return truncatedNumber;
     }
 
-    // 1. Import csv
+    // 2. Import csv
     function importCsv() {
-      // 1.1. Parse csv file
+      // 2.1. Parse csv file
       const input = document.getElementById('csvInput'); // Get the file input element from the HTML document
       const file = input.files[0]; // Get the selected file
       let event = new Event('change'); // Create a custom event object
@@ -548,7 +548,7 @@ class World {
             inputMeshes[j].dispatchEvent(event);
           }
     
-          // 1.2. Set values of input elements
+          // 2.2. Set values of input elements
           for (let l = 0; l <= shapeParams.length - 1; l++) {
             inputBlendShapes[l].value = Number(shapeParams[l]);
             inputBlendShapes[l].dispatchEvent(event);
@@ -562,7 +562,7 @@ class World {
     }
 
     function parseCSV(csv) {
-      // Your CSV parsing logic here
+      // CSV parsing logic here
       const rows = csv.split('\n');
       const result = rows;
       return result;
@@ -613,70 +613,32 @@ class World {
 
     }
 
+    // 3. Export obj file
     document.getElementById("export-btn").addEventListener("click", function () {
       scene.traverse(function (object) {
         if (!object.isSkinnedMesh) return;
         if (object.geometry.isBufferGeometry !== true) throw new error('only buffergeometry supported.');
-        // if (object.geometry.morphAttributes && Object.keys(object.geometry.morphAttributes).length > 0) {
-        // }
-
-
-        // let filtered_blends = initialBlends.filter(blend => object.name === blend.name);
-        // if (filtered_blends.length > 0) {
-        //   let influences = filtered_blends[0].value;
-        //   for (let i = 0; i < influences.length; i++) {
-        //     object.morphTargetInfluences[i] = influences[i];
-        //   }
-        // }
-
-        // object.skeleton.bones.forEach(bone => {
-        //   let filtered = initialRotations.filter(rot => {
-        //     return rot.name == bone.name
-        //   })
-        //   if (filtered.length > 0) {
-        //     console.log(bone.name)
-        //     console.log(bone.rotation)
-        //     console.log(filtered[0])
-        //     bone.rotation.x = filtered[0].rx;
-        //     bone.rotation.y = filtered[0].ry;
-        //     bone.rotation.z = filtered[0].rz;
-        //     bone.position.x = filtered[0].px;
-        //     bone.position.y = filtered[0].py;
-        //     bone.position.z = filtered[0].pz;         
-        //   }
-        //   else {
-        //     bone.rotation.set(0, 0, 0)
-        //   }
-        // });
-
-        // var positionattribute = object.geometry.getAttribute('position');
-        // var normalattribute = object.geometry.getAttribute('normal');
-        // var v1 = new Vector3();
-        // for (var j = 0; j < positionattribute.count; j++) {
-        //   object.boneTransform(j, v1);
-        //   // object.getVertexPosition(j, v1);
-        //   positionattribute.setXYZ(j, v1.x, v1.y, v1.z);
-        //   getBoneNormalTransform.call(object, j, v1);
-        //   normalattribute.setXYZ(j, v1.x, v1.y, v1.z);
-        // }
-        // positionattribute.needsUpdate = true;
-        // normalattribute.needsUpdate = true;
-
       });
 
-
+      // Initialize OBJExporter object
       const exporter = new OBJExporter();
 
+      // Get mouse model from three.js scene
       withMorphedAttributes(scene, (root) => {
+        // 3.1. Export obj file
+        // Get obj and material file from OBJExporter
         const { output, mtl } = exporter.parse(root);
         {
+          // Download obj file
           const blob = new Blob([output], { type: "text/plain" });
           const link = document.createElement("a");
           link.href = URL.createObjectURL(blob);
           link.download = "exported_model.obj";
           link.click();
         }
+        // 3.2. Export material file
         {
+          // Download mtl file
           const blob = new Blob([mtl], { type: "text/plain" });
           const link = document.createElement("a");
           link.href = URL.createObjectURL(blob);
@@ -684,7 +646,6 @@ class World {
           link.click();
         }
       });
-
     });
 
 
